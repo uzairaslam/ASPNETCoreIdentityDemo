@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ASPNETCoreIdentityDemo.Models.ViewModels
@@ -7,6 +8,7 @@ namespace ASPNETCoreIdentityDemo.Models.ViewModels
     {
         [Required]
         [EmailAddress]
+        [Remote(action: "IsEmailAvailable",controller:"Account")]
         public string Email { get; set; }
         
         [Required]

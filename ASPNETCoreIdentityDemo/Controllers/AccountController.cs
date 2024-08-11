@@ -89,5 +89,21 @@ namespace ASPNETCoreIdentityDemo.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> IsEmailAvailable(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Email {email} is already in use.");
+            }
+        }
     }
 }

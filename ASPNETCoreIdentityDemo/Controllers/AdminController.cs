@@ -1,4 +1,5 @@
-﻿using ASPNETCoreIdentityDemo.Models.ViewModels;
+﻿using ASPNETCoreIdentityDemo.Models;
+using ASPNETCoreIdentityDemo.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +8,9 @@ namespace ASPNETCoreIdentityDemo.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public AdminController(RoleManager<IdentityRole> roleManager)
+        public AdminController(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
@@ -32,7 +33,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
                 }
                 else
                 {
-                    var role = new IdentityRole() { Name = roleModel?.RoleName };
+                    var role = new ApplicationRole() { Name = roleModel?.RoleName, Description = roleModel.Description };
                     IdentityResult result = await _roleManager.CreateAsync(role);
 
                     if (result.Succeeded)
@@ -86,6 +87,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
                 else
                 {
                     role.Name = model.RoleName;
+                    role.Description = model.Description;
                      var result = await _roleManager.UpdateAsync(role);
                     if (result.Succeeded)
                     {

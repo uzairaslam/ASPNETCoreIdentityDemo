@@ -10,5 +10,6 @@ namespace ASPNETCoreIdentityDemo.Models.ViewModels
         public string RoleName { get; set; }
 
         public string? Description { get; set; }
+        public List<string>? Users { get; set; }
     }
 }
